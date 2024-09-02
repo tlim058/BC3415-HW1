@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 import google.generativeai as palm
 
 # Configure the PaLM API with your key
-api = "AIzaSyCSoos0XSU8eMk2a0vP6nyEuQerp8HrLEI"
+api = "AIzaSyBI7-gHGhxr_yyfg_xb8fkywnzvXIK-lzs"
 palm.configure(api_key=api)
 model = {"model": "models/chat-bison-001"}
 
@@ -21,11 +21,15 @@ def makersuite():
     if request.method == "POST":
         q = request.form.get("q")
         try:
-            r = palm.chat(messages=q, **model)
-            response_message = r.messages[-1]['content']  
+            #r = palm.chat(messages=q, **model)
+            # response_message = r.messages[-1]['content']
+            model = palm.GenerativeModel(model_name="gemini-1.5-flash")
+            response = model.generate_content([q])
         except Exception as e:
-            response_message = f"Error: {str(e)}"
-        return render_template("makersuite.html", r=response_message)
+            #response_message = f"Error: {str(e)}"
+            response = f"Error: {str(e)}"
+        #return render_template("makersuite.html", r=response_message)
+        return render_template("makersuite.html", r=response.text)
     return render_template("makersuite.html")
 
 @app.route("/joke", methods=["GET", "POST"])
