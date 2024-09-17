@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import google.generativeai as palm
 import textblob
+from textblob import TextBlob
 
 # Configure the PaLM API with your key
 api = "AIzaSyBI7-gHGhxr_yyfg_xb8fkywnzvXIK-lzs"
@@ -39,7 +40,7 @@ def joke():
     return render_template("joke.html")
 
 @app.route("/textblob", methods=["GET", "POST"])
-def textblob():
+def textblobsite():
     return render_template("textblob.html")
 
 @app.route("/makersuite2", methods=["GET", "POST"])
