@@ -39,6 +39,8 @@ def joke():
     
     return render_template("joke.html")
 
+@app.route
+
 @app.route("/textblob", methods=["GET", "POST"])
 def textblobsite():
     return render_template("textblob.html")
