@@ -39,7 +39,9 @@ def joke():
     
     return render_template("joke.html")
 
-@app.route
+@app.route("/transfer_money",methods=["GET","POST"])
+def transfer_money():
+    return(render_template("transfer_money.html"))
 
 @app.route("/textblob", methods=["GET", "POST"])
 def textblobsite():
